@@ -65,7 +65,7 @@ spec:
             - name: WORDPRESS_DB_HOST
               value: svc-mysql
             - name: WORDPRESS_DB_USER
-              value: somename
+              value: somenamee
             - name: WORDPRESS_DB_PASSWORD
               value: "password"
           ports:
