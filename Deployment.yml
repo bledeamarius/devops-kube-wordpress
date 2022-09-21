@@ -21,6 +21,8 @@ spec:
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: "rootpassword"
+            - name: MYSQL_ROOT_HOST
+              value: "%"
           ports:
             - containerPort: 3306
               name: port-mysql
@@ -62,8 +64,10 @@ spec:
           env:
             - name: WORDPRESS_DB_HOST
               value: svc-mysql
+            - name: WORDPRESS_DB_USER
+              value: somename
             - name: WORDPRESS_DB_PASSWORD
-              value: "rootpassword"
+              value: "password"
           ports:
             - containerPort: 80
               name: port-wordpress
