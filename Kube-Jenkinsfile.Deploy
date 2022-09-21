@@ -21,15 +21,22 @@ pipeline {
                 sh 'sed -i "s/PORT_TO_EXPOSE/"${PORT_TO_EXPOSE}"/g" Service.yml'
             }
         }
+        stage('Create Volumes') {
+            steps {
+                sh '''
+                   kubectl apply -f Volumes.yml
+                '''
+            }
+        }
         stage('Deploy container') {
             steps {
-                sh '''            
+                sh '''    
                      kubectl apply -f Deployment.yml
                 '''
             }
         }
 
-          stage('Expose container') {
+          stage('Create Services') {
             steps {
                 sh '''
                     kubectl create -f Service.yml

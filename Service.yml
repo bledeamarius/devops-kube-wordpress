@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: svc-wordpress
+  labels:
+    app: wordpress
 spec:
   type: NodePort
   selector:
@@ -9,4 +11,16 @@ spec:
   ports:
     - port: 80
       targetPort: 80
-      nodePort: PORT_TO_EXPOSE
+      nodePort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-mysql
+  labels:
+    app: mysql
+spec:
+  ports:
+    - port: 3306
+  selector:
+    tier: db-mysql

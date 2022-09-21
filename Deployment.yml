@@ -1,20 +1,80 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress-app
+  name: deployment-mysql
   labels:
-    tier: deployment-wordpress
+    app: deployment-mysql
+spec:
+  template:
+    metadata:
+      name: pod-mysql
+      labels:
+        tier: db-mysql
+    spec:
+      containers:
+        - name: mysql
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          image: mysql:5.6
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "rootpassword"
+          ports:
+            - containerPort: 3306
+              name: port_mysql
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: persistent_storage_mysql
+      volumes:
+        - name: persistent_storage_mysql
+          persistentVolumeClaim:
+            claimName: mysql-pv-claim
+
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: db-mysql
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-wordpress
+  labels:
+    app: deployment-wordpress
 spec:
   template:
     metadata:
       name: pod-wordpress
       labels:
-        tier: pod-wordpress
+        tier: frontend-wordpress
     spec:
       containers:
         - name: wordpress
-          image: wordpress
+          image: wordpress:4.8-apache
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: wordpress-mysql
+            - name: WORDPRESS_DB_PASSWORD
+              value: "rootpassword"
+          ports:
+            - containerPort: 80
+              name: port_wordpress
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: persistent_storage_wordpress
+      volumes:
+        - name: persisntent_storage_wordpress
+          persistentVolumeClaim:
+            claimName: wordpress-pv-claim
+
   replicas: 1
   selector:
     matchLabels:
-      tier: pod-wordpress
+      tier: frontend-wordpress
