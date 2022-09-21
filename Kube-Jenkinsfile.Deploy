@@ -39,7 +39,7 @@ pipeline {
           stage('Create Services') {
             steps {
                 sh '''
-                    kubectl create -f Service.yml
+                    kubectl apply -f Service.yml
                 '''
             }
         }
