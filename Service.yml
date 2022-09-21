@@ -7,7 +7,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    tier: pod-wordpress
+    tier: frontend-wordpress
   ports:
     - port: 80
       targetPort: 80
