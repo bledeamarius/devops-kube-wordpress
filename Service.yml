@@ -24,3 +24,4 @@ spec:
     - port: 3306
   selector:
     tier: db-mysql
+  clusterIP: None

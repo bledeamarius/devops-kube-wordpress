@@ -61,7 +61,7 @@ spec:
           #     cpu: "500m"
           env:
             - name: WORDPRESS_DB_HOST
-              value: svc-wordpress
+              value: svc-mysql
             - name: WORDPRESS_DB_PASSWORD
               value: "rootpassword"
           ports:
