@@ -6,10 +6,10 @@ pipeline {
     parameters {
         string(name: 'PORT_TO_EXPOSE', defaultValue: '30010',               description: 'Specify the port')
     }
-    environment {
-        // DOCKER_REGISTRY      = 'maryusmm'
-        // PROJECT_TO_COPY_FROM = 'pip-frontend-build-v2'
-    }
+    // environment {
+    //     // DOCKER_REGISTRY      = 'maryusmm'
+    //     // PROJECT_TO_COPY_FROM = 'pip-frontend-build-v2'
+    // }
 
     stages {
 
