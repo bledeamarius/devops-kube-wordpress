@@ -28,7 +28,7 @@ spec:
             - mountPath: /var/lib/mysql
               name: persistent-storage-mysql
       volumes:
-        - name: persistent_storage_mysql
+        - name: persistent-storage-mysql
           persistentVolumeClaim:
             claimName: mysql-pv-claim
 
@@ -70,7 +70,7 @@ spec:
             - mountPath: /var/www/html
               name: persistent-storage-wordpress
       volumes:
-        - name: persisntent_storage_wordpress
+        - name: persistent-storage-wordpress
           persistentVolumeClaim:
             claimName: wordpress-pv-claim
 
