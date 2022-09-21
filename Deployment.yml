@@ -36,7 +36,8 @@ spec:
   selector:
     matchLabels:
       tier: db-mysql
-
+  strategy:
+    type: Recreate
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -78,3 +79,5 @@ spec:
   selector:
     matchLabels:
       tier: frontend-wordpress
+  strategy:
+    type: Recreate
