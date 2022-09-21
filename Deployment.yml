@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-app
+  labels:
+    tier: deployment-wordpress
+spec:
+  template:
+    metadata:
+      name: pod-wordpress
+      labels:
+        tier: pod-wordpress
+    spec:
+      containers:
+        - name: wordpress
+          image: wordpress
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: pod-wordpress

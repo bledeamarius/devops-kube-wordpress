@@ -1,0 +1,47 @@
+
+
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'PORT_TO_EXPOSE', defaultValue: '30010',               description: 'Specify the port')
+    }
+    environment {
+        // DOCKER_REGISTRY      = 'maryusmm'
+        // PROJECT_TO_COPY_FROM = 'pip-frontend-build-v2'
+    }
+
+    stages {
+
+
+        stage('Prepare Kube Objects') {
+            steps {
+
+                echo '~~~ Replacing port to expose ~~~'
+                sh 'sed -i "s/PORT_TO_EXPOSE/"${PORT_TO_EXPOSE}"/g" Service.yml'
+            }
+        }
+        stage('Deploy container') {
+            steps {
+                sh '''            
+                     kubectl apply -f Deployment.yml
+                '''
+            }
+        }
+
+          stage('Expose container') {
+            steps {
+                sh '''
+                    kubectl create -f Service.yml
+                '''
+            }
+        }
+
+    }
+    post {
+        always {
+            cleanWs() // clean workspace
+        }
+ 
+    }
+}
