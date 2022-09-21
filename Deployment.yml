@@ -26,7 +26,7 @@ spec:
               name: port_mysql
           volumeMounts:
             - mountPath: /var/lib/mysql
-              name: persistent_storage_mysql
+              name: persistent-storage-mysql
       volumes:
         - name: persistent_storage_mysql
           persistentVolumeClaim:
@@ -68,7 +68,7 @@ spec:
               name: port_wordpress
           volumeMounts:
             - mountPath: /var/www/html
-              name: persistent_storage_wordpress
+              name: persistent-storage-wordpress
       volumes:
         - name: persisntent_storage_wordpress
           persistentVolumeClaim:
