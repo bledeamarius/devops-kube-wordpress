@@ -28,6 +28,13 @@ pipeline {
                 '''
             }
         }
+        stage('Create Secrets and ConfigMaps') {
+            steps {
+                sh '''
+                   kubectl apply -f MySql*.yml
+                '''
+            }
+        }
         stage('Deploy container') {
             steps {
                 sh '''    
