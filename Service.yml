@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: svc-wordpress
   labels:
-    app: wordpress
+    tier: frontend-wordpress
 spec:
   type: NodePort
   selector:
@@ -18,7 +18,7 @@ kind: Service
 metadata:
   name: svc-mysql
   labels:
-    app: mysql
+    tier: db-mysql
 spec:
   ports:
     - port: 3306
