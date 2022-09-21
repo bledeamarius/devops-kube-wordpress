@@ -23,7 +23,7 @@ spec:
               value: "rootpassword"
           ports:
             - containerPort: 3306
-              name: port_mysql
+              name: port-mysql
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: persistent-storage-mysql
@@ -65,7 +65,7 @@ spec:
               value: "rootpassword"
           ports:
             - containerPort: 80
-              name: port_wordpress
+              name: port-wordpress
           volumeMounts:
             - mountPath: /var/www/html
               name: persistent-storage-wordpress
