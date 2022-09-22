@@ -34,7 +34,7 @@ pipeline {
                    kubectl apply -f MySqlRootSecret.yml
                    kubectl apply -f MySqlUserSecret.yml
 
-                   kubectl apply -f ConfigMap.conf
+                   kubectl apply -f ConfigMap.yml
                 '''
             }
         }
