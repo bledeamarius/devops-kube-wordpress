@@ -32,6 +32,8 @@ pipeline {
             steps {
                 sh '''
                    kubectl apply -f MySql*.yml
+
+                   kubectl apply -f ConfigMap.conf
                 '''
             }
         }
