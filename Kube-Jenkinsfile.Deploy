@@ -18,7 +18,7 @@ pipeline {
             steps {
 
                 echo '~~~ Replacing port to expose ~~~'
-                sh ```
+                sh '''
                 SERVICE_FILE_CONTENT=$(<Service.yml)
 
                 # Check if emtpy
@@ -32,7 +32,7 @@ pipeline {
                     echo $SERVICE_FILE_CONTENT
                     echo "-------------"
                 fi
-                ```
+                '''
             }
         }
         stage('Create Volumes') {
