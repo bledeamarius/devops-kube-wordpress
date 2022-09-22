@@ -15,10 +15,10 @@ pipeline {
 
                 echo '~~~ Replacing port to expose ~~~'
                 script {
-                    String currentDir = new File("${env.WORKSPACE}/.").getAbsolutePath()
+                    String currentDir = new File("${env.WORKSPACE}/${env.BUILD_NUMBER}/.").getAbsolutePath()
                     println currentDir
 
-                    String serviceFileContent = new File('${env.WORKSPACE}/Service.yml').text
+                    String serviceFileContent = new File('${env.WORKSPACE}/${env.BUILD_NUMBER}/Service.yml').text
                     
                     if (serviceFileContent) {
                         serviceFileContent.replace("PORT_TO_EXPOSE",${PORT_TO_EXPOSE})
