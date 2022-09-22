@@ -16,6 +16,9 @@ pipeline {
                 echo '~~~ Replacing port to expose ~~~'
                 sh 'ls'
                 script {
+                    String currentDir = new File(".").getAbsolutePath()
+                    println currentDir
+                    
                     String serviceFileContent = new File('./Service.yml').text
                     
                     if (serviceFileContent) {
