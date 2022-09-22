@@ -17,11 +17,9 @@ pipeline {
                 script {
                     String currentDir = new File("${env.WORKSPACE}/${env.BUILD_NUMBER}/.").getAbsolutePath()
                     println currentDir
+                    
+                    sh "cd ${env.WORKSPACE}/${env.BUILD_NUMBER}; ls"
 
-                    def fileList = "ls ${env.WORKSPACE}/${env.BUILD_NUMBER}/".execute()
-                    def files= []
-                    fileList.text.eachLine {files.add(it)}
-                    println files
 
                     String serviceFileContent = new File('${env.WORKSPACE}/${env.BUILD_NUMBER}/Service.yml').text
                     
