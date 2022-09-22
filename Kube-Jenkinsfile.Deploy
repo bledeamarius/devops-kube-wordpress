@@ -6,10 +6,6 @@ pipeline {
     parameters {
         string(name: 'PORT_TO_EXPOSE', defaultValue: '30010',               description: 'Specify the port')
     }
-    // environment {
-    //     // DOCKER_REGISTRY      = 'maryusmm'
-    //     // PROJECT_TO_COPY_FROM = 'pip-frontend-build-v2'
-    // }
 
     stages {
 
@@ -18,16 +14,19 @@ pipeline {
             steps {
 
                 echo '~~~ Replacing port to expose ~~~'
-                String serviceFileContent = new File('Service.yml').text
                 
-                if (serviceFileContent) {
-                    serviceFileContent.replace("PORT_TO_EXPOSE",${PORT_TO_EXPOSE})
-                    println "--------------"
-                    println serviceFileContent
-                }
-                else {
-                    println "File Service.yml could not be found"
-                    return 1;   
+                script {
+                    String serviceFileContent = new File('Service.yml').text
+                
+                    if (serviceFileContent) {
+                        serviceFileContent.replace("PORT_TO_EXPOSE",${PORT_TO_EXPOSE})
+                        println "--------------"
+                        println serviceFileContent
+                    }
+                    else {
+                        println "File Service.yml could not be found"
+                        return 1;   
+                    }
                 }
             }
         }
