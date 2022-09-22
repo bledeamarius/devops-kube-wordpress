@@ -31,7 +31,8 @@ pipeline {
         stage('Create Secrets and ConfigMaps') {
             steps {
                 sh '''
-                   kubectl apply -f MySql*.yml
+                   kubectl apply -f MySqlRootSecret.yml
+                   kubectl apply -f MySqlUserSecret.yml
 
                    kubectl apply -f ConfigMap.conf
                 '''
