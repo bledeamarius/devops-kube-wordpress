@@ -13,10 +13,6 @@ spec:
     spec:
       containers:
         - name: mysql
-          # resources:
-          #   limits:
-          #     memory: "512Mi"
-          #     cpu: "900m"
           image: mysql:5.6
           env:
             - name: MYSQL_ROOT_PASSWORD
@@ -24,8 +20,6 @@ spec:
                 secretKeyRef:
                   name: mysql-root-password
                   key: password
-            # - name: MYSQL_ROOT_HOST
-            #   value: "%"
           ports:
             - containerPort: 3306
               name: port-mysql
@@ -59,11 +53,7 @@ spec:
     spec:
       containers:
         - name: wordpress
-          image: wordpress:4.8-apache
-          # resources:
-          #   limits:
-          #     memory: "256Mi"
-          #     cpu: "500m"
+          image: wordpress:4.8-apachedone
           env:
             - name: WORDPRESS_DB_HOST
               valueFrom:
