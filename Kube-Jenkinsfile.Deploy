@@ -18,7 +18,20 @@ pipeline {
             steps {
 
                 echo '~~~ Replacing port to expose ~~~'
-                sh 'sed -i "s/PORT_TO_EXPOSE/"${PORT_TO_EXPOSE}"/g" Service.yml'
+                #sh 'sed -i "s/PORT_TO_EXPOSE/"${PORT_TO_EXPOSE}"/g" Service.yml'
+                SERVICE_FILE_CONTENT=$(<Service.yml)
+
+                # Check if emtpy
+                if [ -z $SERVICE_FILE_CONTENT ]
+                then
+                    echo "File Service.yml could not be found."
+                    exit 1
+                else
+                    SERVICE_FILE_CONTENT="${SERVICE_FILE_CONTENT/PORT_TO_EXPOSE/${PORT_TO_EXPOSE}"
+                    echo "-----------"
+                    echo $SERVICE_FILE_CONTENT
+                    echo "-------------"
+                fi
             }
         }
         stage('Create Volumes') {
